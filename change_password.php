@@ -13,8 +13,8 @@
     if ($_POST['password2'] != $_POST['password3']) {
         die('<script type="text/javascript">alert("passowrds are not the same");location.replace("edit.php")</script>');
     }
-    $_POST['password1'] = md5($_POST['password1']);
-    $password1=$_POST['password1'];
+    $password1= md5($_POST['password1']);
+   
 
     //check whether the password exists
     $sql1 = "Select User_Password from users where User_Password = '$password1'";
@@ -27,15 +27,15 @@
         $uppercase = preg_match('@[A-Z]@', $_POST['password1']);
         $lowercase = preg_match('@[a-z]@',  $_POST['password1']);
         $number    = preg_match('@[0-9]@',  $_POST['password1']);
-        $specialchar = preg_match('@[0-9]@',  $_POST['password1']);
+        $Special_Character = preg_match('@[\W]@',  $_POST['password1']);
     
     //passord rules
     if(!$uppercase || !$lowercase || !$number || strlen( $_POST['password1']) < 6) {
         die('<script type="text/javascript">alert("Password must comply with rules");location.replace("change_password.php")</script>');
     }
   
-    $_POST['password2'] = md5($_POST['password2']);
-    $Newpassword=$_POST['password2'];
+   
+    $Newpassword=  md5($_POST['password2']);
 
     $sql = "update users set User_Password = '$Newpassword' Where User_Email ='$login_session'";
     $query = mysqli_query($conn,$sql);
@@ -67,7 +67,7 @@
                 <form action="change_password.php" method="POST">
 
                 <div class="form-group">
-                    <label>Old Password</label>
+                    <label>Current Password</label>
                     <input type="password" class="form-control" name="password1">
                 </div>
 

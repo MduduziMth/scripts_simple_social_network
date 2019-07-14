@@ -17,10 +17,10 @@ if (isset($_POST['submit'])) {
     $uppercase = preg_match('@[A-Z]@', $_POST['password1']);
     $lowercase = preg_match('@[a-z]@',  $_POST['password1']);
     $number    = preg_match('@[0-9]@',  $_POST['password1']);
-    $Special_Character = preg_match('@[0-9]@',  $_POST['password1']);
+    $Special_Character = preg_match('@[\W]@',  $_POST['password1']);
 
 //passord rules
-if(!$uppercase || !$lowercase || !$number || strlen( $_POST['password1']) < 6) {
+if(!$uppercase || !$lowercase || !$number ||  !$Special_Character || strlen( $_POST['password1']) < 6) {
     die('<script type="text/javascript">alert("Password must comply with rules");location.replace("signup.php")</script>');
 }
 
@@ -110,11 +110,12 @@ if(!$uppercase || !$lowercase || !$number || strlen( $_POST['password1']) < 6) {
                     <input type="password" class="form-control" name="password2">
                 </div>
                     
-                <button type="submit" name="submit"  class="btn btn-outline-primary">Login</button>
+                <button type="submit" name="submit"  class="btn btn-outline-primary">Sign Up</button>
 
             </form>
             </div>
             </div>
         </div>
         <?php include('templates/footer.php'); ?>
+
 

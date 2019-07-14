@@ -151,13 +151,3 @@ COMMIT;
 
 
 
-/*Friend request query, P for Pending
-Insert Into Friends Values (User_id, Friend Id, 'P')
-
-
-//Friend Accept query, A for Accepted 
-Insert Into Friends Values(User_id, Friend_id,'A')
-
-//Decline request query, D for Declined
-Insert Into Friends Values(User_Id, Friend, 'D')
-*/

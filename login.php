@@ -21,6 +21,16 @@ if (isset($_POST['submit'])) {
     $query = mysqli_query($conn,$sql);
     $rows = mysqli_num_rows($query);
     if ($rows == 1) {
+        if(!empty($_POST["remember"])) {
+			setcookie ("email", $email, time()+ (10 * 365 * 24 * 60 * 60));  
+			//setcookie ("password",	$password,	time()+ (10 * 365 * 24 * 60 * 60));
+		} else {
+			setcookie ("email",""); 
+			//setcookie ("password","");
+		}
+
+
+
         $_SESSION['login_user' ]= $email; // Initializing Session
         header("location: profile.php"); // Redirecting To Other Profile Page
         }
@@ -52,15 +62,20 @@ if (isset($_POST['submit'])) {
 
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="text"  class="form-control" name="email">
+                        <input type="text" value="<?php if(isset($_COOKIE["email"])) { echo $_COOKIE["email"]; } ?>" class="form-control" name="email">
                     </div>
 
                     
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password"  class="form-control" name="password">
+                        <input type="password" value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>" class="form-control" name="password">
                     </div>
 
+                    <div class="form-group">
+                        <label>Remember me</label>
+                        <input type="checkbox" name="remember">
+
+                    </div>
                     <button type="submit" name="submit"  class="btn btn-outline-primary">Login</button>
 
                     </form>

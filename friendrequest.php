@@ -1,14 +1,19 @@
-<?php
+ <?php
 
 include('session.php');
-//get a list of users who are not friends 
-$slqUsers = "select  User_Last,User_First from users JOIN friends ON users.User_Id = friends.F_UserOne  WHERE User_Email <> '$login_session' AND <> F_Status IS NULL";
+//get users who sent a friend request
+$slqUsers = "select  User_Last,User_First from users JOIN friends ON users.User_Id = friends.F_UserOne  WHERE F_Status = 'P'";
 $usersql= mysqli_query($conn,$slqUsers);
+
 /*
-/*Friend request query, P for Pending
-Insert Into Friends Values (User_id, Friend Id, 'P')
-strugling to get friendID to implement this fuctionality
+Friend Accept query, F for Friend 
+Insert Into Friends Values(User_id, Friend_id,'F')
+
+Friend Decline query, D for Decline 
+Insert Into Friends Values(User_id, Friend_id,'D')
+strugling to implement this fuctionalities
  */
+
 ?>
 
 <?php include('templates/header2.php'); ?>
@@ -20,7 +25,7 @@ strugling to get friendID to implement this fuctionality
         <div class="row justify-content-center">
         
             <div class=col-4>
-                <h4>Find Friends</h4>
+                <h4>Friend Request</h4>
                 <?php
         
                 while ($user =  mysqli_fetch_assoc($usersql))
@@ -29,12 +34,13 @@ strugling to get friendID to implement this fuctionality
                 <br>
                 <div class="card">
                     <div class="card-body text-center">
-                        <i class="fas fa-user-friends"></i>
-                       
+                    <i class="fas fa-user-friends"></i>
+                        
                         <p class="card-title"><td><?php echo $user['User_First']; ?></p>
                         <p class="card-title"><td><?php echo $user['User_Last']; ?></p>
-                        <a href="findfriends.php" class="btn btn-outline-info">send request</a>
-                        
+                        <p>sent you a friend request</p>
+                        <a href="friendReq.php" class="btn btn-outline-success">Accept request</a>
+                        <a href="friendReq.php" class="btn btn-outline-danger">Decline request</a>
                     </div>
                 </div>
               <?php  

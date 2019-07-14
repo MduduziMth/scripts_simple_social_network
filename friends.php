@@ -1,7 +1,8 @@
 <?php
 
 include('session.php');
-$slqUsers = "select  User_Last,User_First from users JOIN friends ON users.User_Id = friends.F_UserOne  WHERE F_Status = 'F' and User_Email <> '$login_session'";
+//get users who are friends
+$slqUsers = "select  User_Last,User_First from users JOIN friends ON users.User_Id = friends.F_UserOne  WHERE F_Status = 'F'";
 $usersql= mysqli_query($conn,$slqUsers);
 ?>
 <?php include('templates/header2.php'); ?>
